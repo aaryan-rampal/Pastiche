@@ -22,7 +22,7 @@ def filter_labels(sample_in, labels_list):
     return sample_in.labels.data()['text'][0] not in labels_list
 
 
-@app.route("/process_drawing_array", methods=['POST'])
+@app.route("/process_drawing_array", methods=['POST', 'GET'])
 def process_drawing_array():
 
     folder_name = 'data'
@@ -119,7 +119,9 @@ def process_drawing_array():
     if ret:
         # Decode the image from the encoded format
         decoded_image = cv2.imdecode(image_encoded, 1)  # Use '1' for color images, '0' for grayscale
-    
+        true_image = Image.fromarray(decoded_image)
+        image_stream = io.BytesIO()
+        true_image.save(image_stream, format='JPEG')
         #cv2.imshow("Decoded Image", decoded_image)
         #cv2.waitKey(0)
         #cv2.destroyAllWindows()
@@ -127,6 +129,7 @@ def process_drawing_array():
         print("Error encoding the image.")
     np.set_printoptions(threshold=np.inf)
     #return decoded_image
+    return send_file(true_image, mimetype='image/jpeg')
 
     return "aa"
 
