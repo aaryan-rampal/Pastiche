@@ -95,7 +95,10 @@ function App() {
 	  data: {
 		  arr : lines
 	  }
-	});
+	})
+  .then(response => {
+    console.log(response, typeof (response));
+  })
   };
 
 
