@@ -124,9 +124,9 @@ def process_drawing_array():
         # Decode the image from the encoded format
         decoded_image = cv2.imdecode(image_encoded, 1)  # Use '1' for color images, '0' for grayscale
     
-        #cv2.imshow("Decoded Image", decoded_image)
-        #cv2.waitKey(0)
-        #cv2.destroyAllWindows()
+        cv2.imshow("Decoded Image", decoded_image)
+        cv2.waitKey(0)
+        cv2.destroyAllWindows()
     else:
         print("Error encoding the image.")
     np.set_printoptions(threshold=np.inf)
