@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
+import axios from 'axios';
 import './App.css';
 
 function App() {
@@ -87,7 +88,17 @@ function App() {
     const ctx = canvas.getContext('2d');
     setShowBackground(false); // Hide the background image
     console.log(lines);
+
+	axios({
+	  method: 'post',
+	  url: 'http://localhost:5000/process_drawing_array',
+	  data: {
+		  arr : lines
+	  }
+	});
   };
+
+
 
   const handleMouseMove = (e) => {
     if (!drawing) {
