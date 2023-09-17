@@ -81,7 +81,7 @@ function App() {
     canvas.style.backgroundImage = 'none';
   };
 
-  const handleMouseUp = () => {
+  const handleMouseUp = async() => {
 
     setDrawing(false);
     const canvas = canvasRef.current;
@@ -89,13 +89,16 @@ function App() {
     setShowBackground(false); // Hide the background image
     console.log(lines);
 
-	axios({
+	await axios({
 	  method: 'post',
 	  url: 'http://localhost:5000/process_drawing_array',
 	  data: {
 		  arr : lines
 	  }
-	});
+	})
+  .then(response => {
+    console.log(response, typeof (response));
+  })
   };
 
 
